@@ -1,0 +1,126 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.modal h3 {
+  margin-bottom: 20px;
+  color: #0056b3;
+}
+
+.modal hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.modal ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal ul li {
+  margin-bottom: 10px;
+}
+
+.modal ul li button {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.modal ul li button:hover {
+  background: #0056b3;
+}
+
+.modal input[type="text"] {
+  width: calc(100% - 30px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.modal .create-list-container {
+  display: flex;
+  gap: 10px;
+}
+
+.modal .create-list-container input[type="text"] {
+  flex: 1;
+}
+
+.modal .create-list-container button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal .create-list-container button:hover {
+  background: #0056b3;
+}
+
+.modal .new-list-item {
+  background: none;
+  color: #007bff;
+  border: none;
+  padding: 0;
+  cursor: default;
+  font-size: 16px;
+  text-align: left;
+}
