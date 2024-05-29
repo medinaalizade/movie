@@ -6,6 +6,11 @@ export const ListProvider = ({ children }) => {
   const [lists, setLists] = useState([]);
 
   const createList = (listName, movie) => {
+    if (lists.some(list => list.name === listName)) {
+      console.error('List with the same name already exists.');
+      return;
+    }
+
     const newList = {
       name: listName,
       movies: [movie],
@@ -16,7 +21,7 @@ export const ListProvider = ({ children }) => {
   const addMovieToList = (listName, movie) => {
     setLists(prevLists => {
       return prevLists.map(list => {
-        if (list.name === listName) {
+        if (list.name === listName && !list.movies.some(m => m.Title === movie.Title)) {
           return {
             ...list,
             movies: [...list.movies, movie],
@@ -33,7 +38,6 @@ export const ListProvider = ({ children }) => {
         if (list.name === listName) {
           const updatedMovies = list.movies.filter(movie => movie !== movieToRemove);
           if (updatedMovies.length === 0) {
-            // If the list becomes empty, remove it from the lists array
             return null;
           }
           return {
@@ -52,4 +56,3 @@ export const ListProvider = ({ children }) => {
     </ListContext.Provider>
   );
 };
-

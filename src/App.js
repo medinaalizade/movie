@@ -18,7 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage searchQuery={searchQuery} />} />
         <Route path="/basket" element={<BasketPage />} />
-        <Route path="/basket/:listName" element={<ListDetailsPage />} /> {/* Add route for ListDetailsPage */}
+        <Route path="/basket/:listName" element={<ListDetailsPage />} />
       </Routes>
     </Router>
   );
