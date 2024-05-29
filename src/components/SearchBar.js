@@ -32,7 +32,7 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearchSubmit, onSuggestionCl
   }, [searchQuery]);
 
   const handleSuggestionClick = (movie) => {
-    onSuggestionClick(movie); 
+    onSuggestionClick(movie);
     setSearchQuery(movie.Title);
     setSuggestions([]);
   };
@@ -57,15 +57,20 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearchSubmit, onSuggestionCl
       setSelectedSuggestionIndex((prevIndex) =>
         prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1
       );
-    } else if (e.key === 'Enter' && selectedSuggestionIndex >= 0) {
+    } else if (e.key === 'Enter') {
       e.preventDefault();
-      handleSuggestionClick(suggestions[selectedSuggestionIndex]);
+      if (selectedSuggestionIndex >= 0) {
+        handleSuggestionClick(suggestions[selectedSuggestionIndex]);
+      } else {
+        onSearchSubmit(searchQuery);
+        setSuggestions([]);
+      }
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearchSubmit(e);
+    onSearchSubmit(searchQuery);
     setSuggestions([]);
   };
 

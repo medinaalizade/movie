@@ -22,10 +22,12 @@ const HomePage = ({ searchQuery }) => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      if (searchQuery || selectedMovieFromLocation) {
-        const query = searchQuery || selectedMovieFromLocation.Title;
+      if (selectedMovieFromLocation) {
+        setMovies([selectedMovieFromLocation]);
+        setNotFound(false); 
+      } else if (searchQuery) {
         try {
-          const response = await axios.get(`${apiURL}&s=${query}`);
+          const response = await axios.get(`${apiURL}&s=${searchQuery}`);
           if (response.data.Response === 'True') {
             setMovies(response.data.Search.filter(movie => movie.Poster !== 'N/A' && movie.Type === 'movie'));
             setNotFound(false); 
@@ -78,27 +80,27 @@ const HomePage = ({ searchQuery }) => {
       console.error('Error fetching movie details:', error);
     }
   };
-
+  
   const handleAddMovieToList = (movie) => {
     setMovieToAdd(movie);
     setIsModalOpen(true);
   };
-
+  
   const handleCreateList = (listName) => {
     createList(listName, movieToAdd);
     setIsModalOpen(false);
   };
-
+  
   const handleAddToList = (listName) => {
     addMovieToList(listName, movieToAdd);
     setIsModalOpen(false);
   };
-
+  
   const closeMovieDetailsModal = () => {
     setIsMovieDetailsModalOpen(false);
     setSelectedMovie(null);
   };
-
+  
   return (
     <div className="home-page">
       <div className="movie-grid-container">
@@ -118,7 +120,7 @@ const HomePage = ({ searchQuery }) => {
           ))}
         </div>
       </div>
-
+  
       {isMovieDetailsModalOpen && (
         <div className={`modal ${isMovieDetailsModalOpen ? 'open' : ''}`}>
           <div className="modal-content">
@@ -159,6 +161,8 @@ const HomePage = ({ searchQuery }) => {
         />
       )}
     </div>
-);
-};
-export default HomePage;
+  );
+  };
+  
+  export default HomePage;
+  

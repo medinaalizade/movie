@@ -18,14 +18,14 @@ const Navbar = ({ onSearch }) => {
     setSearchOpen(!searchOpen);
   };
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    onSearch(searchQuery);
+  const handleSearchSubmit = (query) => {
+    onSearch(query);
     navigate('/');
     setSearchOpen(false); 
   };
 
   const handleSuggestionClick = (movie) => {
+    setSearchQuery(movie.Title);
     navigate('/', { state: { selectedMovie: movie } });
     setSearchOpen(false);
   };
@@ -47,7 +47,7 @@ const Navbar = ({ onSearch }) => {
   return (
     <nav className="navbar" ref={menuRef}>
       <div className="logo">
-        <Link to="/" onClick={() => {setMenuOpen(false); window.location.reload();}}>Movie Organizer</Link>
+        <Link to="/" onClick={() => { setMenuOpen(false); window.location.reload(); }}>Movie Organizer</Link>
       </div>
       <div className="menu" onClick={toggleMenu}>Menu</div>
       <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
